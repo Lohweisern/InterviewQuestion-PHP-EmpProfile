@@ -1,3 +1,14 @@
 [
-   
+    {
+        "name": "Johnny",
+        "gender": "Male",
+        "marital_status": "Single",
+        "phone": "0129808761",
+        "email": "johnny123@gmail.com",
+        "address": "17, Lintang Pekaka 1, Taman Pekaka, Sungai Dua",
+        "dob": "2002-07-20",
+        "nationality": "Malaysian",
+        "hire_date": "2025-06-09",
+        "department": "HR"
+    }
 ]
