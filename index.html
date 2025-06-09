@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Employee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>Add New Employee</h2>
+
+  <div id="error-messages"></div>
+
+  <form id="employee-form" action="submit.php" method="POST" onsubmit="return validateForm()">
+
+    <div class="form-group">
+      <label for="name">Employee Name</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="">-- Select --</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="marital_status">Marital Status</label>
+      <select id="marital_status" name="marital_status" required>
+        <option value="">-- Select --</option>
+        <option>Single</option>
+        <option>Married</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone No.</label>
+      <input type="tel" id="phone" name="phone" required pattern="^\+?[0-9]{10,15}$" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="3" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required />
+    </div>
+
+    <div class="form-group">
+      <label for="nationality">Nationality</label>
+      <input type="text" id="nationality" name="nationality" required />
+    </div>
+
+    <div class="form-group">
+      <label for="hire_date">Hire Date</label>
+      <input type="date" id="hire_date" name="hire_date" required />
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department</label>
+      <input type="text" id="department" name="department" required />
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <a href="view_employees.php" class="view-button">View Current Employees</a>
+
+  <script>
+    function validateForm() {
+      const errors = [];
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const maritalStatus = document.getElementById('marital_status').value;
+      const dob = document.getElementById('dob').value;
+      const hireDate = document.getElementById('hire_date').value;
+
+      if (name.length < 2) errors.push("Name must be at least 2 characters.");
+      if (!/^\+?[0-9]{10,15}$/.test(phone)) {
+        errors.push("Phone must be 10–15 digits (optionally starting with +).");
+      }
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        errors.push("Enter a valid email address.");
+      }
+      if (!maritalStatus) errors.push("Marital status is required.");
+      if (!dob) errors.push("Date of birth is required.");
+      if (!hireDate) errors.push("Hire date is required.");
+
+      const errorDiv = document.getElementById('error-messages');
+      errorDiv.innerHTML = "";
+
+      if (errors.length > 0) {
+        errorDiv.innerHTML = errors.map(e => `<div>• ${e}</div>`).join("");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>
